@@ -8,24 +8,24 @@ activities <- activities[,2]
 columnWidths <- replicate(length(features), 16)
 
 # get test data
-testSubject <- read.table('./data/UCI HAR Dataset/test/subject_test.txt', header=FALSE, col.names=c("subject"))
-testActivity <- read.table('./data/UCI HAR Dataset/test/y_test.txt', header=FALSE, col.names=c("activity"))
-testTimeFrequency <- read.table('./data/UCI HAR Dataset/test/X_test.txt', header=FALSE, col.names=features)
+testSubject <- read.table('./data/UCI HAR Dataset/test/subject_test.txt', header=FALSE, col.names=c("Subject"))
+testActivity <- read.table('./data/UCI HAR Dataset/test/y_test.txt', header=FALSE, col.names=c("Activity"))
+testTimeFrequency <- read.table('./data/UCI HAR Dataset/test/X_test.txt', header=FALSE, col.names=features, check.names=FALSE)
 testData <- cbind(testSubject, type='TEST', testActivity, testTimeFrequency)
-testData$activity <- activities[testData$activity]
+testData$Activity <- activities[testData$Activity]
 
 # get training data
-trainingSubject <- read.table('./data/UCI HAR Dataset/train/subject_train.txt', header=FALSE, col.names=c("subject"))
-trainingActivity <- read.csv('./data/UCI HAR Dataset/train/y_train.txt', header=FALSE, col.names=c("activity"))
-trainingTimeFrequency <- read.table('./data/UCI HAR Dataset/train/X_train.txt', col.names=features)
+trainingSubject <- read.table('./data/UCI HAR Dataset/train/subject_train.txt', header=FALSE, col.names=c("Subject"))
+trainingActivity <- read.csv('./data/UCI HAR Dataset/train/y_train.txt', header=FALSE, col.names=c("Activity"))
+trainingTimeFrequency <- read.table('./data/UCI HAR Dataset/train/X_train.txt', col.names=features, check.names=FALSE)
 trainingData <- cbind(trainingSubject, type='TRAINING', trainingActivity, trainingTimeFrequency)
-trainingData$activity <- activities[trainingData$activity]
+trainingData$Activity <- activities[trainingData$Activity]
 
 # combine test and training data
 combinedData <- rbind(testData, trainingData)
 
 # get a subset of mean and standard deviation columns
-meanStdColumns <- c("subject","activity", grep("(mean|std)", names(combinedData), value=TRUE))
+meanStdColumns <- c("Subject","Activity", grep("(mean|std)\\(\\)", names(combinedData), value=TRUE))
 meanStdData <- combinedData[, meanStdColumns]
 
 # Create meaningful column names

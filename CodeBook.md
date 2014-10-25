@@ -4,8 +4,8 @@
 
 These variables identify the unique subject/activity pair the variables relate to:
 
- - Subject: integer subject ID.
- - Activity:  string activity name:
+ - Subject ID (integer)
+ - Activity (string)
   	- Walking
   	- Walking Upstairs
   	- Walking Downstairs
@@ -13,9 +13,9 @@ These variables identify the unique subject/activity pair the variables relate t
   	- Standing
   	- Laying
 
-## Measurement Means
+## Means of Activity Measurements
 
-All variables are the mean of a measurement for each subject and activity. This is indicated by the initial Mean in the variable name. All values are floating point numbers.
+All variables are the mean of a measurement for each activity for each subject. All values are floating point numbers.
 
  - Time domain body acceleration mean along X, Y, and Z:
   - MeanTimeBodyAccMeanX
