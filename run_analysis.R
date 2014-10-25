@@ -1,3 +1,5 @@
+ptm <- proc.time()
+
 setwd("~/Documents/Coursera/Johns Hopkins Data Science Track/Getting and Cleaning Data")
 features <- read.table('./data/UCI HAR Dataset/features.txt', header=FALSE, col.names=c("feature_id","feature_name"))
 features <- features[,2]
@@ -28,7 +30,7 @@ combinedData <- rbind(testData, trainingData)
 meanStdColumns <- c("Subject","Activity", grep("(mean|std)\\(\\)", names(combinedData), value=TRUE))
 meanStdData <- combinedData[, meanStdColumns]
 
-# Create meaningful column names
+# tidy up variable column names
 names(meanStdData) <- gsub("^t", "Time", names(meanStdData))
 names(meanStdData) <- gsub("^f", "Frequency", names(meanStdData))
 names(meanStdData) <- gsub("-mean\\(\\)", "Mean", names(meanStdData))
@@ -36,13 +38,12 @@ names(meanStdData) <- gsub("-std\\(\\)", "StdDev", names(meanStdData))
 names(meanStdData) <- gsub("-", "", names(meanStdData))
 names(meanStdData) <- gsub("BodyBody", "Body", names(meanStdData))
 
-# get mean values
+# get mean values for subject - activity pairs
 library(reshape2)
-library(data.table)
-melted <- melt(meanStdData, id.vars=c("subject","activity"))
-dt <- data.table(melted)
-agg <- aggregate(value~subject+activity+variable, data=dt, mean)
+melted <- melt(meanStdData, id.vars=c("Subject","Activity"))
+tidyMeans <- dcast(melted, Subject+Activity ~ variable, mean)
 
 # write file
-write.table(agg, "./data/tidyMeans.txt", row.names=FALSE)
+write.table(tidyMeans, "./data/tidyMeans.txt", row.names=FALSE)
 
+proc.time() - ptm
