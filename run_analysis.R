@@ -1,6 +1,5 @@
 ptm <- proc.time()
 
-setwd("~/Documents/Coursera/Johns Hopkins Data Science Track/Getting and Cleaning Data")
 features <- read.table('./data/UCI HAR Dataset/features.txt', header=FALSE, col.names=c("feature_id","feature_name"))
 features <- features[,2]
 

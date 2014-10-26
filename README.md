@@ -1,4 +1,4 @@
-Tidy Data From Human Activity Recognition Using Smartphones Dataset
+Tidy Data From Human Activity Recognition Using Smartphone Datasets
 ===============================
 
 The data was transformed in the following steps:
@@ -13,4 +13,6 @@ The data was transformed in the following steps:
 
 The tidy data set has been written to **tidyMeans.txt**. Details of the variables can be found in **CodeBook.md**. The variables follow a basic naming convention:
 
-Mean{timeOrFreq}{measurement}{meanOrStd}{XYZ}
+{Time | Frequency}{Measurement}{Mean | StdDev}{X Y Z}
+
+Time or Frequency indicates the domain. Measurement is one of the original features. Mean or StdDev indicates the aggregation of the feature.  X, Y, or Z indicates the axis along which the measurement was taken.
